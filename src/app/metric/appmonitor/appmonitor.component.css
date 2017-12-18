@@ -1,0 +1,30 @@
+ .list-group {
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+.aerror
+{
+    padding-left:166px;
+    text-decoration: none;
+   
+}
+.aerror  :focus {
+    outline: 0;
+}
+a:hover, a:active, a:focus {
+    outline: none;
+    border: 0;
+}
+   /* .modal-content {
+      /*background-color: #292b2c;
+      color: white;
+      width: 1000px;
+      height: 100%;
+          margin-left: -233px;
+
+    }
+    .dark-modal .close {
+      color: white;   
+    }*/
+
+    

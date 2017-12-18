@@ -1,0 +1,234 @@
+
+<!------------- Modal code --------------------- -->
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+          <button type="button" class="close" data-dismiss="modal" (click)="mclose()">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+
+            <div *ngIf='loadf'>
+              <img src="assets/load.gif" style="padding-left: 378px;"/>
+              </div>
+
+      <!--    [ngClass]="x.etype == 'error' ? 'card-header bg-danger text-white': x.etype == 'success' ?  'card-header bg-success text-white' : 'card-header bg-warning text-white'" -->
+          <div *ngIf='!loadf'>
+           <div [ngClass]="(gtype== 'success')&&(appdata[0].Flag==0) ? 'panel panel-success': gtype=='error'?'panel panel-danger' : 'panel panel-warning'">
+      <div class="panel-heading">Appserver Monitoring</div>
+      <div class="panel-body">
+<table class="table table-striped"  style="font-size:12px;" *ngIf='gtype'>
+    <thead>
+      <tr>
+         <th>Client Name</th>
+        <th>Server Name</th>
+        <th>Domain Name</th>
+       <th> Staus</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of appdata[0].Data">
+      <tr *ngIf="gtype=='success' && item.status=='UP'" >
+        <td>{{appdata[0].Client}}</td>
+        <td>{{appdata[0].servername}}</td>
+        <td>{{item.Domain}}</td>
+         <td ><span style="color:#68ae00" *ngIf="item.status=='UP'">{{item.status}}   <span class="glyphicon glyphicon-upload"></span></span>
+      <span style="color:red" *ngIf="item.status=='Down'">{{item.status}}   <span class="glyphicon glyphicon-download"></span></span></td>
+      
+      </tr>
+     
+    </tbody>
+    <tbody *ngFor="let item of appdata[0].Data">
+      <tr *ngIf="gtype=='error' && item.status=='Down'" >
+        <td>{{appdata[0].Client}}</td>
+        <td>{{appdata[0].servername}}</td>
+        <td>{{item.Domain}}</td>
+         <td ><span style="color:#68ae00" *ngIf="item.status=='UP'">{{item.status}}   <span class="glyphicon glyphicon-upload"></span></span>
+      <span style="color:red" *ngIf="item.status=='Down'">{{item.status}}   <span class="glyphicon glyphicon-download"></span></span></td>
+      
+      </tr>
+     
+    </tbody>
+     <tbody *ngFor="let item of appdata[0].Data">
+      <tr *ngIf="gtype=='all'">
+        <td>{{appdata[0].Client}}</td>
+        <td>{{appdata[0].servername}}</td>
+        <td>{{item.Domain}}</td>
+         <td ><span style="color:#68ae00" *ngIf="item.status=='UP'">{{item.status}}   <span class="glyphicon glyphicon-upload"></span></span>
+      <span style="color:red" *ngIf="item.status=='Down'">{{item.status}}   <span class="glyphicon glyphicon-download"></span></span></td>
+      
+      </tr>
+     
+    </tbody>
+  </table>
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="mclose()">Close</button>
+        </div>
+      </div>
+    </div>
+    </div>
+  
+
+  <!----------------------------------------------------- -->
+
+
+
+
+
+<div class="row" style="margin-top: -10px;padding-left: 25px;
+    padding-right: 25px;">
+  <div class='col-xs-12'>
+
+<div class="panel panel-default">
+  <div class="panel-heading">AppServer Monitor</div>
+  <div class="panel-body">
+    <div class="row">
+                      <div class="col-xs-3">
+                 <div class="panel panel-info">
+    <div class="panel-heading">
+    App Server 
+  </div>
+  <div class="card-body">
+     <ul class="list-group" >
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Success <a href=""  class="aerror" data-toggle="modal" data-target="#myModal" (click)="openc('success')">
+    <span class="badge badge-success badge-pill" style="background-color: #68ae00;cursor:pointer" >{{appserverm[2].success}}</span></a>
+  <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Large Modal</button></li>
+ --> <li class="list-group-item d-flex justify-content-between align-items-center">
+    Warning <a href=""  class="aerror">
+    <span class="badge badge-warning badge-pill" style="background-color: #f4cb36;cursor:pointer" >0</span></a>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">  
+   Error<a href=""  class="aerror" data-toggle="modal" data-target="#myModal" (click)="openc('error')" style="padding-left:187px">
+   <span class="badge badge-primary badge-pill" style="background-color: red;cursor:pointer">{{appserverm[0].error}}</span></a>
+ </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+   Total Target Monitored <a href=""  class="aerror" style="    padding-left: 78px;"data-toggle="modal" data-target="#myModal" (click)="openc('all')">
+    <span class="badge badge-primary badge-pill" >{{appserverm[1].total}}</span></a>
+  </li>
+</ul>
+  </div>
+  
+  
+</div></div>
+ <div class="col-xs-3">
+                <div class="panel panel-info">
+    <div class="panel-heading">
+    ProcessScheduler
+  </div>
+  
+  <div class="card-body">
+     <ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Success 
+    <span class="badge badge-success badge-pill" style="background-color: #68ae00;">14</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Warning
+    <span class="badge badge-warning badge-pill" style="background-color: #f4cb36;">2</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+   Error
+    <span class="badge badge-primary badge-pill" style="background-color: red;">1</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+   Total Target Monitored
+    <span class="badge badge-primary badge-pill" >1</span>
+  </li>
+</ul>
+  </div>
+  
+  
+</div></div>
+
+<!------------------------------------------------Processscheduler------------------------ -->
+
+<div class="col-xs-3">
+                 <div class="panel panel-info">
+    <div class="panel-heading">
+    Webserver 
+  </div>
+  <div class="card-body">
+     <ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Success 
+    <span class="badge badge-success badge-pill" style="background-color: #68ae00;">14</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Warning
+    <span class="badge badge-warning badge-pill" style="background-color: #f4cb36;">2</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+   Error
+    <span class="badge badge-primary badge-pill" style="background-color: red;">1</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+   Total Target Monitored
+    <span class="badge badge-primary badge-pill" >1</span>
+  </li>
+</ul>
+  </div>
+  
+  
+</div></div>
+<!----------------------------------- database -------------------------------->
+         <div class="col-xs-3">
+                 <div class="panel panel-info">
+    <div class="panel-heading">
+    Database
+  </div>
+  <div class="card-body">
+     <ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Success 
+    <span class="badge badge-success badge-pill" style="background-color: #68ae00;">14</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Warning
+    <span class="badge badge-warning badge-pill" style="background-color: #f4cb36;">2</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+   Error
+    <span class="badge badge-primary badge-pill" style="background-color: red;">1</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+   Total Target Monitored
+    <span class="badge badge-primary badge-pill" >1</span>
+  </li>
+</ul>
+  </div>
+  
+  
+</div></div>
+
+
+
+
+
+
+
+  </div>
+</div>
+
+
+  </div>
+  </div>
+
+
+
+  

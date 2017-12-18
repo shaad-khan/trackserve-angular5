@@ -1,0 +1,367 @@
+<!------------- Modal code --------------------- -->
+
+<div class="modal fade" id="servermodal1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+          <button type="button" class="close" data-dismiss="modal" (click)="mclose()">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+     <div *ngIf='loadf'>
+              <img src="assets/load.gif" style="padding-left: 378px;"/>
+              </div>
+           
+ <div *ngIf='!loadf'>
+           <div class='panel panel-success'>
+      <div class="panel-heading">Cpu Monitoring</div>
+      <div class="panel-body">
+<table class="table table-striped"  style="font-size:12px;" >
+    <thead>
+      <tr>
+         <th>Client Name</th>
+        <th>Server Name</th>
+        <th>Min Threshold Value</th>
+      <th>Max Threshold Value</th>
+      <th>Cpu usage </th>
+      </tr>
+    </thead>
+      <tbody *ngFor="let item of cpudata">
+      <tr  >
+        <td>{{item.Client}}</td>
+        <td>{{item.servername}}</td>
+        <td>{{item.Tmin}}</td>
+        <td>{{item.Tmax}}</td>
+          <td>{{item.Data}}</td>
+          <td>
+            <a  data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  <span class="glyphicon glyphicon-info-sign" style="font-size:16px;color:green" (click)="moreinfo('cpu',item.servername)"></span>
+</a>
+            
+            
+            </td>
+      </tr>
+     
+    </tbody>
+
+
+
+</table>
+
+
+</div></div></div>
+
+<div class="collapse" id="collapseExample">
+  <div class="well">
+   <div class="row">
+<div class="col-md-12">
+<div class="panel panel-default">
+  <div class="panel-heading">Graph Showing past hour Cpu Usage trends</div>
+  <div class="panel-body">
+    <div style="display: block;">
+       <canvas baseChart #baseChart="base-chart" width="400" height="150"
+                [datasets]="chartdata"
+                [labels]="chartlabel"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<div class="col-md-12">
+<table class="table table-striped"  style="font-size:12px;" >
+    <thead>
+      <tr>
+         <th>Machine Name</th>
+        <th>Vendor Details</th>
+        <th>Processor</th>
+      <th>RAM</th>
+      <th>System Type </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>usvaash1psdap1</td>
+        <td>Intel</td>
+        <td>Intel(R) Xeon CPU E5-2695 @ 2.30 GHz</td>
+        <td>24.0 GB</td>
+          <td>64-bit Operating System,x64 based processor</td>
+          <td>
+            </tr>
+    </tbody>
+</table>
+
+
+</div>
+     </div>
+  </div>
+</div>
+
+
+      </div>
+    
+       
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="mclose()">Close</button>
+        </div>
+         </div>
+         </div>
+        </div>
+ <!----------------------------------Modal disk modal ----  -->
+     
+        <div class="modal fade" id="servermodal2" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+          <button type="button" class="close" data-dismiss="modal" (click)="mclose()">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+     <div *ngIf='loadf'>
+              <img src="assets/load.gif" style="padding-left: 378px;"/>
+              </div>
+           
+ <div *ngIf='!loadf'>
+           <div class='panel panel-info'>
+      <div class="panel-heading">Disk Monitoring</div>
+      <div class="panel-body">
+<table class="table table-striped"  style="font-size:12px;" >
+    <thead>
+      <tr>
+         <th>Client Name</th>
+        <th>Server Name</th>
+<!--<th>Min Threshold Value</th>
+      <th>Max Threshold Value</th>-->
+      <th>Disk Usage</th>
+      </tr>
+    </thead>
+    
+     <tbody *ngFor="let item of diskdata">
+      <tr  >
+        <td>{{item.Client}}</td>
+        <td>{{item.servername}}</td>
+       <!-- <td>{{item.Tmin}}</td>
+        <td>{{item.Tmax}}</td>-->
+          <td>
+          <div class="progress" *ngFor="let d of item.Data">
+        <div class="progress-bar progress-bar-success" [style.width]="((d.Used_space/d.Total_space)*100) + '%'">
+           {{d.Mount_Point}} used ({{d.Used_space}} GB / {{d.Total_space}} GB)
+        </div></div>
+            
+          </td>
+          <td>
+            <a  data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  <span class="glyphicon glyphicon-info-sign" style="font-size:16px;color:green" (click)="moreinfo('cpu',item.servername)"></span>
+</a>
+            
+            
+            </td>
+      </tr>
+     
+    </tbody>
+
+
+
+</table>
+
+
+</div></div></div>
+
+<div class="collapse" id="collapseExample">
+  <div class="well">
+   <div class="row">
+<div class="col-md-12">
+<div class="panel panel-default">
+  <div class="panel-heading">Graph Showing past hour Cpu Usage trends</div>
+  <div class="panel-body">
+    <div style="display: block;">
+       <canvas baseChart #baseChart="base-chart" width="400" height="150"
+                [datasets]="chartdata"
+                [labels]="chartlabel"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<div class="col-md-12">
+<table class="table table-striped"  style="font-size:12px;" >
+    <thead>
+      <tr>
+         <th>Machine Name</th>
+        <th>Vendor Details</th>
+        <th>Processor</th>
+      <th>RAM</th>
+      <th>System Type </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>usvaash1psdap1</td>
+        <td>Intel</td>
+        <td>Intel(R) Xeon CPU E5-2695 @ 2.30 GHz</td>
+        <td>24.0 GB</td>
+          <td>64-bit Operating System,x64 based processor</td>
+          <td>
+            </tr>
+    </tbody>
+</table>
+
+
+</div>
+     </div>
+  </div>
+</div>
+
+
+      </div>
+    
+       
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="mclose()">Close</button>
+        </div>
+         </div>
+         </div>
+        </div>
+      
+  
+
+  <!----------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class='col-xs-12'>
+
+<div class="panel panel-default">
+  <div class="panel-heading">server monitoring</div>
+  <div class="panel-body">
+ <div class="row">
+
+
+<div class="col-xs-3">
+                 <div class="panel panel-info">
+    <div class="panel-heading">
+    CPU
+  </div>
+  <div class="card-body">
+    <div style="display: block">
+
+<div class="card" style="width: 20rem;">
+  <img class="card-img-top img-metric" src="https://cdn1.iconfinder.com/data/icons/data-analytics-and-data-storage-circle-flat-shad-2/100/cpu__chip__processor__computer-128.png">
+  
+  <ul class="list-group list-group-flush gmetric">
+    <li class="list-group-item">Error  <span class="badge badge-primary badge-pill" style="background-color: red;">1</span></li>
+    <li class="list-group-item">Warning</li>
+    <li class="list-group-item">Success</li>
+    <li class="list-group-item">Total Monitored<a href="" class="aerror" style="padding-left: 105px"data-toggle="modal" data-target="#servermodal1" (click)="getd('cpu')"> <span class="badge badge-primary badge-pill" style="background-color:gray;">1</span></a></li>
+  </ul>
+  <!--<div class="progress">
+        <div class="progress-bar progress-bar-danger" style="width: 80%">
+            used (40%)
+        </div>
+       <!-- <div class="progress-bar progress-bar-success" style="width: 25%">
+            Free (25%)
+        </div>-->
+       <!-- <div class="progress-bar progress-bar-danger" style="width: 15%">
+            Junk Files (15%)
+        </div>
+    </div>---- progress div -->
+ <!-- <div class="card-block">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>-->
+</div>
+
+
+
+</div>
+  </div>
+  
+  
+</div></div>
+
+
+
+
+   <div class="col-xs-3">
+                 <div class="panel panel-info">
+    <div class="panel-heading">
+    Disk Space
+  </div>
+  <div class="card-body">
+    <div style="display: block">
+ <!-- <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>-->
+<div class="card" style="width: 20rem;">
+  <img class="card-img-top img-metric" src="https://cdn0.iconfinder.com/data/icons/multimedia-and-electronics/512/hdd_hard_drive_disk_technology_storage_save_hardware_information_data_sata_device_memory_tool_backup_computer_electronics_equipment_flat_design_icon-512.png" alt="Card image cap">
+  <!-- <div class="card-block">
+   <h4 class="card-title">Card title</h4>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>-->
+  <ul class="list-group list-group-flush gmetric">
+    <li class="list-group-item">Error  <span class="badge badge-primary badge-pill" style="background-color: red;">1</span></li>
+    <li class="list-group-item">Warning</li>
+    <li class="list-group-item">Success</li>
+    <li class="list-group-item">Total Monitored<a href="" class="aerror" style="padding-left: 105px"data-toggle="modal" data-target="#servermodal2" (click)="getd('disk')"> <span class="badge badge-primary badge-pill" style="background-color:gray;">1</span></a></li>
+  </ul>
+ <!-- <div class="card-block">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>-->
+</div>
+
+
+
+</div>
+  </div>
+  
+  
+</div></div>
+
+
+
+
+
+
+
+
+
+
+<!-------------- Row ends -- -->
+
+
+
+
+
+ </div>
+  </div></div></div>

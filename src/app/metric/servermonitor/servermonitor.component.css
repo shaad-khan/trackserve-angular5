@@ -1,0 +1,38 @@
+.list-group {
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+.gmetric
+{
+  margin-top: 10px;
+    width: 267px;
+    padding-left: 8px;
+    padding-bottom: 6px;
+
+}
+.img-metric
+{
+        margin-top: 9px;
+    margin-left:  63px;
+    vertical-align: middle;
+    height: 131px;
+    width: 133px;
+
+}
+.aerror
+{
+    padding-left:167px;
+    text-decoration: none;
+   
+}
+.aerror  :focus {
+    outline: 0;
+}
+a:hover, a:active, a:focus {
+    outline: none;
+    border: 0;
+}
+.progress{
+        margin-bottom: 2px;
+        background-color: #ccc;
+}
